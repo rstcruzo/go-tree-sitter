@@ -583,6 +583,13 @@ func (n Node) NamedDescendantForPointRange(start Point, end Point) *Node {
 	return n.t.cachedNode(nn)
 }
 
+func (n Node) NamedDescendantForByteRange(start uint32, end uint32) *Node {
+	cStart := C.uint32_t(start)
+	cEnd := C.uint32_t(end)
+	nn := C.ts_node_named_descendant_for_byte_range(n.c, cStart, cEnd)
+	return n.t.cachedNode(nn)
+}
+
 // TreeCursor allows you to walk a syntax tree more efficiently than is
 // possible using the `Node` functions. It is a mutable object that is always
 // on a certain syntax node, and can be moved imperatively to different nodes.
